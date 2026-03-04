@@ -16,7 +16,7 @@
 
     // ─── Config from URL params ────────────────────────────
     const params = new URLSearchParams(window.location.search);
-    const SCRIPT_URL = params.get('script_url') || '';
+    const SCRIPT_URL = params.get('script_url') || 'https://script.google.com/a/macros/quantum-scaling.com/s/AKfycbz9g01QsAPLjGV-5nDwQqG63l-6KXseVawMGdvoS_ztjASQUW_Kgy8mnWuRBZzaYdK2mg/exec';
 
     // ─── State ─────────────────────────────────────────────
     let selectedBroadcast = null;
@@ -25,6 +25,34 @@
     let countdownInterval = null;
     let content = {};
 
+    // ─── JSONP Helper (bypasses CORS) ─────────────────────
+    var jsonpCounter = 0;
+    function jsonp(url) {
+        return new Promise(function (resolve, reject) {
+            var callbackName = '_wbr_cb_' + (++jsonpCounter) + '_' + Date.now();
+            var script = document.createElement('script');
+            var timer = setTimeout(function () {
+                cleanup();
+                reject(new Error('Request timed out'));
+            }, 30000);
+
+            function cleanup() {
+                clearTimeout(timer);
+                delete window[callbackName];
+                if (script.parentNode) script.parentNode.removeChild(script);
+            }
+
+            window[callbackName] = function (data) {
+                cleanup();
+                resolve(data);
+            };
+
+            script.src = url + (url.indexOf('?') >= 0 ? '&' : '?') + 'callback=' + callbackName;
+            script.onerror = function () { cleanup(); reject(new Error('Network error')); };
+            document.head.appendChild(script);
+        });
+    }
+
     // ─── Init ──────────────────────────────────────────────
     document.addEventListener('DOMContentLoaded', async () => {
         setupScrollReveal();
@@ -32,16 +60,12 @@
         setupForm();
 
         if (!SCRIPT_URL) {
-            // No script URL — use fallback content for preview
             applyContent(getFallbackContent());
             return;
         }
 
-        // Single call to fetch BOTH content + webinar info
         try {
-            const res = await fetch(SCRIPT_URL + '?action=all');
-            if (!res.ok) throw new Error('Failed to load data');
-            const data = await res.json();
+            var data = await jsonp(SCRIPT_URL + '?action=all');
 
             if (data.error) throw new Error(data.error);
 
@@ -274,19 +298,15 @@
             btn.disabled = true;
 
             try {
-                const res = await fetch(SCRIPT_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'text/plain' }, // Apps Script requires text/plain for CORS
-                    body: JSON.stringify({
-                        name: name,
-                        email: email,
-                        broadcast_id: selectedBroadcast ? selectedBroadcast.broadcast_id : '',
-                        episode_id: selectedBroadcast ? selectedBroadcast.episode_id : '',
-                        webinar_id: selectedBroadcast ? (selectedBroadcast.webinar_id || '') : '',
-                    }),
-                });
+                // Use JSONP via GET to bypass CORS
+                var regUrl = SCRIPT_URL + '?action=register' +
+                    '&email=' + encodeURIComponent(email) +
+                    '&name=' + encodeURIComponent(name) +
+                    '&broadcast_id=' + encodeURIComponent(selectedBroadcast ? selectedBroadcast.broadcast_id : '') +
+                    '&episode_id=' + encodeURIComponent(selectedBroadcast ? selectedBroadcast.episode_id : '') +
+                    '&webinar_id=' + encodeURIComponent(selectedBroadcast ? (selectedBroadcast.webinar_id || '') : '');
 
-                const data = await res.json();
+                var data = await jsonp(regUrl);
                 if (data.error) throw new Error(data.error);
 
                 showThankYou(data.confirmation_link, data.already_registered);
