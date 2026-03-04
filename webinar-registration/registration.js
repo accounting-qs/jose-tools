@@ -282,7 +282,7 @@
                         email: email,
                         broadcast_id: selectedBroadcast ? selectedBroadcast.broadcast_id : '',
                         episode_id: selectedBroadcast ? selectedBroadcast.episode_id : '',
-                        webinar_id: '', // Uses the one configured in Script Properties
+                        webinar_id: selectedBroadcast ? (selectedBroadcast.webinar_id || '') : '',
                     }),
                 });
 

@@ -10,24 +10,26 @@
  * 3. Paste this code (replacing any default code)
  * 4. Go to Project Settings (gear icon) → Script Properties
  * 5. Add property: WEBINARGEEK_API_KEY = your_api_key
- * 6. Add property: WEBINAR_ID = your_webinar_id
- * 7. Click Deploy → New Deployment → Web App
+ * 6. Click Deploy → New Deployment → Web App
  *    - Execute as: Me
  *    - Who has access: Anyone
- * 8. Copy the Web App URL — use this in the registration page config
+ * 7. Copy the Web App URL — use this in the registration page config
+ *
+ * WEBINAR ID:
+ * - If you add a "webinar_id" row in the Content sheet, it uses that specific webinar
+ * - If left blank, it auto-detects the next upcoming webinar from your account
  */
 
 // ═══ CONFIG ══════════════════════════════════════════════
 
 function getConfig() {
-  const props = PropertiesService.getScriptProperties();
+  var props = PropertiesService.getScriptProperties();
   return {
     apiKey: props.getProperty('WEBINARGEEK_API_KEY') || '',
-    webinarId: props.getProperty('WEBINAR_ID') || '',
   };
 }
 
-const WG_BASE = 'https://app.webinargeek.com/api/v2';
+var WG_BASE = 'https://app.webinargeek.com/api/v2';
 
 // ═══ ENTRY POINTS ════════════════════════════════════════
 
@@ -35,7 +37,7 @@ const WG_BASE = 'https://app.webinargeek.com/api/v2';
  * Handles GET requests (webinar info + page content)
  */
 function doGet(e) {
-  const action = (e.parameter && e.parameter.action) || 'content';
+  var action = (e.parameter && e.parameter.action) || 'content';
 
   try {
     if (action === 'webinar-info') {
@@ -46,8 +48,8 @@ function doGet(e) {
     }
     if (action === 'all') {
       // Single call to get BOTH content + webinar info
-      const content = getSheetContent();
-      const webinar = getWebinarInfo();
+      var content = getSheetContent();
+      var webinar = getWebinarInfo(content.content);
       return respond({ content: content.content, webinar: webinar.webinar, broadcasts: webinar.broadcasts });
     }
     return respond({ error: 'Unknown action: ' + action }, 400);
@@ -61,8 +63,8 @@ function doGet(e) {
  */
 function doPost(e) {
   try {
-    const body = JSON.parse(e.postData.contents);
-    const result = registerSubscriber(body);
+    var body = JSON.parse(e.postData.contents);
+    var result = registerSubscriber(body);
     return respond(result);
   } catch (err) {
     return respond({ error: err.message }, 500);
@@ -72,43 +74,102 @@ function doPost(e) {
 // ═══ GET CONTENT FROM SHEET ══════════════════════════════
 
 function getSheetContent() {
-  const ss = SpreadsheetApp.getActiveSpreadsheet();
-  const sheet = ss.getSheetByName('Content') || ss.getSheets()[0];
-  const data = sheet.getDataRange().getValues();
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var sheet = ss.getSheetByName('Content') || ss.getSheets()[0];
+  var data = sheet.getDataRange().getValues();
   
-  const content = {};
-  for (let i = 0; i < data.length; i++) {
-    const key = data[i][0];
-    const value = data[i][1];
+  var content = {};
+  for (var i = 0; i < data.length; i++) {
+    var key = data[i][0];
+    var value = data[i][1];
     if (key && typeof key === 'string' && key.trim()) {
       content[key.trim()] = value !== undefined && value !== null ? String(value) : '';
     }
   }
   
-  return { content };
+  return { content: content };
+}
+
+// ═══ RESOLVE WEBINAR ID ══════════════════════════════════
+
+/**
+ * Gets the webinar ID from (in priority order):
+ * 1. The "webinar_id" row in the Content sheet
+ * 2. Auto-detect: finds the next upcoming webinar from the account
+ */
+function resolveWebinarId(content) {
+  var config = getConfig();
+  if (!config.apiKey) throw new Error('Missing WEBINARGEEK_API_KEY in Script Properties');
+
+  // 1. Check the Content sheet for a webinar_id
+  if (content && content.webinar_id && content.webinar_id.trim()) {
+    return content.webinar_id.trim();
+  }
+
+  // 2. Auto-detect: fetch all webinars and find the next upcoming one
+  var webinars = wgFetch('/webinars', config.apiKey);
+  var webinarList = webinars.data || webinars || [];
+
+  var bestWebinarId = null;
+  var earliestDate = null;
+
+  for (var w = 0; w < webinarList.length; w++) {
+    var wId = webinarList[w].id;
+
+    try {
+      var episodes = wgFetch('/webinars/' + wId + '/episodes', config.apiKey);
+      var epList = episodes.data || episodes || [];
+
+      for (var e = 0; e < epList.length; e++) {
+        var broadcasts = wgFetch('/webinars/' + wId + '/episodes/' + epList[e].id + '/broadcasts', config.apiKey);
+        var bcList = broadcasts.data || broadcasts || [];
+
+        for (var b = 0; b < bcList.length; b++) {
+          var bc = bcList[b];
+          var bcDate = new Date(bc.starts_at || bc.date);
+
+          // Only consider future broadcasts
+          if (bcDate > new Date() && (bc.status === 'scheduled' || bc.status === 'live' || !bc.status)) {
+            if (!earliestDate || bcDate < earliestDate) {
+              earliestDate = bcDate;
+              bestWebinarId = wId;
+            }
+          }
+        }
+      }
+    } catch (err) {
+      // Skip webinars that fail to load
+      continue;
+    }
+  }
+
+  if (bestWebinarId) return bestWebinarId;
+
+  throw new Error('No upcoming webinars found. Add a "webinar_id" row in your Content sheet, or create a new broadcast in WebinarGeek.');
 }
 
 // ═══ GET WEBINAR INFO ════════════════════════════════════
 
-function getWebinarInfo() {
-  const config = getConfig();
-  if (!config.apiKey || !config.webinarId) {
-    throw new Error('Missing WEBINARGEEK_API_KEY or WEBINAR_ID in Script Properties');
-  }
+function getWebinarInfo(content) {
+  var config = getConfig();
+  if (!config.apiKey) throw new Error('Missing WEBINARGEEK_API_KEY in Script Properties');
+
+  // Resolve which webinar to use
+  var webinarId = resolveWebinarId(content);
 
   // Get webinar metadata
-  const webinar = wgFetch('/webinars/' + config.webinarId, config.apiKey);
+  var webinar = wgFetch('/webinars/' + webinarId, config.apiKey);
 
   // Get episodes
-  const episodes = wgFetch('/webinars/' + config.webinarId + '/episodes', config.apiKey);
-  const episodeList = episodes.data || episodes || [];
+  var episodes = wgFetch('/webinars/' + webinarId + '/episodes', config.apiKey);
+  var episodeList = episodes.data || episodes || [];
 
   // Get broadcasts for each episode
   var allBroadcasts = [];
   for (var i = 0; i < episodeList.length; i++) {
     var ep = episodeList[i];
     var broadcasts = wgFetch(
-      '/webinars/' + config.webinarId + '/episodes/' + ep.id + '/broadcasts',
+      '/webinars/' + webinarId + '/episodes/' + ep.id + '/broadcasts',
       config.apiKey
     );
     var bcList = broadcasts.data || broadcasts || [];
@@ -123,6 +184,7 @@ function getWebinarInfo() {
           date: bc.starts_at || bc.date,
           duration_minutes: bc.duration || null,
           status: bc.status || 'scheduled',
+          webinar_id: webinarId,
         });
       }
     }
@@ -149,7 +211,13 @@ function registerSubscriber(body) {
   var name = body.name || '';
   var broadcastId = body.broadcast_id;
   var episodeId = body.episode_id;
-  var webinarId = body.webinar_id || config.webinarId;
+  var webinarId = body.webinar_id;
+
+  // If no webinar_id was sent from the page, resolve it
+  if (!webinarId) {
+    var content = getSheetContent();
+    webinarId = resolveWebinarId(content.content);
+  }
 
   if (!email || !broadcastId || !episodeId) {
     throw new Error('Missing required fields: email, broadcast_id, episode_id');
@@ -235,8 +303,6 @@ function wgFetch(path, apiKey, method, payload) {
 // ═══ RESPONSE HELPER ═════════════════════════════════════
 
 function respond(data, statusCode) {
-  // Google Apps Script web apps always return 200, 
-  // but we include status in the JSON for the client to check
   var output = ContentService.createTextOutput(JSON.stringify(data));
   output.setMimeType(ContentService.MimeType.JSON);
   return output;
