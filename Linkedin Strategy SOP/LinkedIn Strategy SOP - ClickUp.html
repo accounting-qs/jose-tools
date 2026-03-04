@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LinkedIn Promotion Strategy — SOP for Strategy Coaches</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: #1a1a2e;
+            color: #e0e0e0;
+            line-height: 1.7;
+            padding: 40px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* Banner */
+        .banner {
+            width: 100%;
+            border-radius: 16px;
+            margin-bottom: 32px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Main Title */
+        h1 {
+            font-size: 2.2em;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 4px;
+        }
+
+        h1 .emoji {
+            font-size: 1em;
+        }
+
+        .subtitle {
+            font-size: 1.1em;
+            color: #9ca3af;
+            font-weight: 500;
+            margin-bottom: 24px;
+        }
+
+        /* Meta table */
+        .meta-table {
+            width: auto;
+            border-collapse: collapse;
+            margin-bottom: 24px;
+            font-size: 0.95em;
+        }
+
+        .meta-table td {
+            padding: 6px 16px 6px 0;
+            color: #b0b8c8;
+        }
+
+        .meta-table td:first-child {
+            font-weight: 600;
+            color: #d4a853;
+            white-space: nowrap;
+        }
+
+        /* Callout boxes */
+        .callout {
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin: 20px 0;
+            font-size: 0.95em;
+            line-height: 1.6;
+        }
+
+        .callout-important {
+            background: rgba(234, 179, 8, 0.1);
+            border-left: 4px solid #d4a853;
+        }
+
+        .callout-important .callout-label {
+            color: #d4a853;
+        }
+
+        .callout-tip {
+            background: rgba(59, 130, 246, 0.1);
+            border-left: 4px solid #3b82f6;
+        }
+
+        .callout-tip .callout-label {
+            color: #3b82f6;
+        }
+
+        .callout-warning {
+            background: rgba(239, 68, 68, 0.1);
+            border-left: 4px solid #ef4444;
+        }
+
+        .callout-warning .callout-label {
+            color: #ef4444;
+        }
+
+        .callout-caution {
+            background: rgba(239, 68, 68, 0.08);
+            border-left: 4px solid #f87171;
+        }
+
+        .callout-caution .callout-label {
+            color: #f87171;
+        }
+
+        .callout-label {
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.8em;
+            letter-spacing: 0.05em;
+            margin-bottom: 4px;
+        }
+
+        /* Section headers */
+        h2 {
+            font-size: 1.6em;
+            font-weight: 700;
+            color: #ffffff;
+            margin: 48px 0 8px 0;
+            padding-bottom: 8px;
+            border-bottom: 2px solid rgba(212, 168, 83, 0.3);
+        }
+
+        h3 {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #e2e8f0;
+            margin: 28px 0 12px 0;
+        }
+
+        h4 {
+            font-size: 1.05em;
+            font-weight: 600;
+            color: #cbd5e1;
+            margin: 20px 0 8px 0;
+        }
+
+        /* Dividers */
+        hr {
+            border: none;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(212, 168, 83, 0.4), transparent);
+            margin: 40px 0;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+            font-size: 0.93em;
+        }
+
+        thead th {
+            background: rgba(212, 168, 83, 0.15);
+            color: #d4a853;
+            font-weight: 600;
+            text-align: left;
+            padding: 12px 16px;
+            border-bottom: 2px solid rgba(212, 168, 83, 0.3);
+            font-size: 0.85em;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        tbody td {
+            padding: 10px 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            color: #c8cfd8;
+            vertical-align: top;
+        }
+
+        tbody tr:hover {
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .total-row td {
+            font-weight: 700;
+            color: #d4a853;
+            border-top: 2px solid rgba(212, 168, 83, 0.3);
+        }
+
+        /* Pitfall table */
+        .pitfall-table tbody td:first-child {
+            color: #f87171;
+            font-weight: 500;
+        }
+
+        .pitfall-table tbody td:nth-child(3) {
+            color: #86efac;
+        }
+
+        /* Checklist */
+        .checklist {
+            list-style: none;
+            padding: 0;
+            margin: 12px 0;
+        }
+
+        .checklist li {
+            padding: 8px 0 8px 32px;
+            position: relative;
+            color: #c8cfd8;
+        }
+
+        .checklist li::before {
+            content: "☐";
+            position: absolute;
+            left: 4px;
+            font-size: 1.1em;
+        }
+
+        /* Diagrams */
+        .diagram-container {
+            text-align: center;
+            margin: 24px 0;
+        }
+
+        .diagram-container img {
+            max-width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Phase headers */
+        .phase-header {
+            display: inline-block;
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 0.75em;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 4px;
+            vertical-align: middle;
+        }
+
+        .phase-1 {
+            background: rgba(180, 134, 11, 0.2);
+            color: #d4a853;
+        }
+
+        .phase-2 {
+            background: rgba(30, 111, 186, 0.2);
+            color: #60a5fa;
+        }
+
+        .phase-3 {
+            background: rgba(46, 125, 50, 0.2);
+            color: #86efac;
+        }
+
+        /* Code block */
+        .code-block {
+            background: #0f1729;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
+            padding: 16px 20px;
+            font-family: 'JetBrains Mono', 'SF Mono', monospace;
+            font-size: 0.88em;
+            color: #a0c4ff;
+            overflow-x: auto;
+            margin: 16px 0;
+            line-height: 1.6;
+        }
+
+        /* Context line */
+        .context-line {
+            font-size: 0.92em;
+            font-style: italic;
+            color: #9ca3af;
+            margin-bottom: 16px;
+        }
+
+        /* Key-value info box */
+        .info-grid {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 8px 16px;
+            margin: 16px 0;
+            font-size: 0.93em;
+        }
+
+        .info-label {
+            font-weight: 600;
+            color: #d4a853;
+            white-space: nowrap;
+        }
+
+        .info-value {
+            color: #c8cfd8;
+        }
+
+        /* Handoff grid */
+        .handoff-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin: 16px 0;
+        }
+
+        .handoff-card {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
+            padding: 16px;
+        }
+
+        .handoff-card .card-num {
+            font-size: 0.8em;
+            font-weight: 700;
+            color: #d4a853;
+            margin-bottom: 4px;
+        }
+
+        .handoff-card .card-title {
+            font-weight: 600;
+            color: #e2e8f0;
+            margin-bottom: 4px;
+        }
+
+        .handoff-card .card-desc {
+            font-size: 0.88em;
+            color: #9ca3af;
+        }
+
+        /* Checklist sections */
+        .checklist-section {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 12px;
+            padding: 20px 24px;
+            margin: 16px 0;
+        }
+
+        .checklist-section h4 {
+            margin-top: 0;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 32px 0 16px 0;
+            color: #6b7280;
+            font-size: 0.88em;
+        }
+
+        p {
+            margin: 8px 0;
+        }
+
+        strong {
+            color: #f0f0f0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ==================== BANNER ==================== -->
+    <img src="sop-images/01-banner.png" alt="LinkedIn Outreach Strategy SOP Banner" class="banner">
+
+    <!-- ==================== TITLE ==================== -->
+    <h1><span class="emoji">🔗</span> LinkedIn Promotion Strategy</h1>
+    <div class="subtitle">Standard Operating Procedure for Strategy Coaches</div>
+
+    <table class="meta-table">
+        <tr>
+            <td>📅 Last Updated</td>
+            <td>February 27, 2026</td>
+        </tr>
+        <tr>
+            <td>👥 Audience</td>
+            <td>Strategy coaches new to the LinkedIn promotion workflow</td>
+        </tr>
+        <tr>
+            <td>📌 Version</td>
+            <td>1.0</td>
+        </tr>
+    </table>
+
+    <div class="callout callout-important">
+        <div class="callout-label">⚠️ Important</div>
+        This is a <strong>continuous improvement strategy</strong>, not a prerequisite. The client's webinar funnel
+        should already be live before starting LinkedIn promotion.
+    </div>
+
+    <hr>
+
+    <!-- ==================== OVERVIEW ==================== -->
+    <h2>🧭 Overview</h2>
+
+    <p>The LinkedIn promotion strategy uses <strong>LinkedIn Sales Navigator</strong> + <strong>Expandi</strong> (an
+        automation tool) to send targeted connection requests and follow-up messages that drive prospects to the
+        client's webinar.</p>
+
+    <p>There are <strong>three phases</strong> with a clear handoff between strategy coach and tech coach:</p>
+
+    <div class="diagram-container">
+        <img src="sop-images/02-process-phases.png" alt="3 Phase Process Overview">
+    </div>
+
+    <div class="diagram-container">
+        <img src="sop-images/04-process-flowchart.png" alt="Detailed Process Flowchart">
+    </div>
+
+    <h3>💰 Cost to Client</h3>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Tool</th>
+                <th>Monthly Cost</th>
+                <th>Purpose</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>🔍 LinkedIn Sales Navigator</td>
+                <td><strong>~$99/month</strong></td>
+                <td>Advanced search &amp; lead lists</td>
+            </tr>
+            <tr>
+                <td>🤖 Expandi</td>
+                <td><strong>~$99/month</strong></td>
+                <td>Automated outreach &amp; follow-ups</td>
+            </tr>
+            <tr class="total-row">
+                <td></td>
+                <td>~$198/month total</td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <hr>
+
+    <!-- ==================== PHASE 1 ==================== -->
+    <h2>🛒 Phase 1 — Prerequisites</h2>
+    <p class="context-line">Before any coaching calls</p>
+
+    <p>The client needs <strong>both tools purchased and active</strong> before you begin Phase 2.</p>
+
+    <h3>Client To-Do List</h3>
+    <ul class="checklist">
+        <li>Purchase LinkedIn Sales Navigator (~$99/month)</li>
+        <li>Purchase Expandi (~$99/month)</li>
+    </ul>
+
+    <h3>📋 How to Guide the Client</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Scenario</th>
+                <th>What to Do</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Client is self-sufficient</td>
+                <td>Share the QS video walkthrough for purchasing Sales Navigator. They handle it independently.</td>
+            </tr>
+            <tr>
+                <td>Client needs hand-holding</td>
+                <td>Schedule a short call with the <strong>tech coach</strong> to walk them through signup.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="callout callout-caution">
+        <div class="callout-label">🚫 Stop</div>
+        <strong>Do NOT proceed to Phase 2</strong> until both tools are active. Starting without them creates
+        unnecessary back-and-forth and delays the entire process.
+    </div>
+
+    <hr>
+
+    <!-- ==================== PHASE 2 ==================== -->
+    <h2>✏️ Phase 2 — Strategy Coach Work</h2>
+    <p class="context-line">Copy + Targeting — This is YOUR main responsibility</p>
+
+    <p>You need to deliver <strong>three categories of work</strong> before handing off to the tech coach:</p>
+
+    <div class="diagram-container">
+        <img src="sop-images/05-deliverables-mindmap.png" alt="Strategy Coach Deliverables Mindmap">
+    </div>
+
+    <hr>
+
+    <!-- A) Profile Optimization -->
+    <h3>🅰️ LinkedIn Profile Optimization Copy</h3>
+
+    <p>The client's LinkedIn profile needs to be <strong>rewritten to align with their webinar and offer</strong>.
+        Prepare the following:</p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Deliverable</th>
+                <th>Details</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>1</strong></td>
+                <td><strong>Headline</strong></td>
+                <td>Rewrite to align with the webinar/offer — <em>not</em> their job title</td>
+            </tr>
+            <tr>
+                <td><strong>2</strong></td>
+                <td><strong>About Section</strong></td>
+                <td>Describe who they are, what they do, and promote the webinar. Everything should point toward the
+                    webinar as the CTA</td>
+            </tr>
+            <tr>
+                <td><strong>3</strong></td>
+                <td><strong>Banner Image</strong></td>
+                <td>Tech coach provides a Canva template → client/VA creates the banner → should include a webinar
+                    invitation</td>
+            </tr>
+            <tr>
+                <td><strong>4</strong></td>
+                <td><strong>Featured Section</strong></td>
+                <td>Update with a direct link to the webinar registration/event page</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="callout callout-tip">
+        <div class="callout-label">💡 Tip</div>
+        The copywriter (<strong>James or Mike</strong>) can write the headline and About section if needed. Coordinate
+        with them <strong>early</strong> so this doesn't become a bottleneck.
+    </div>
+
+    <hr>
+
+    <!-- B) Outreach Messages -->
+    <h3>🅱️ Outreach Message Copy</h3>
+
+    <p>Write <strong>four messages total</strong>. All messages must be aligned to the client's specific offer, niche,
+        and business:</p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Message Type</th>
+                <th>Purpose</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>1</strong></td>
+                <td>🤝 <strong>Connection Request</strong></td>
+                <td>The opening message sent with the connection request</td>
+            </tr>
+            <tr>
+                <td><strong>2</strong></td>
+                <td>📩 <strong>Follow-up #1</strong></td>
+                <td>Sent after connection is accepted</td>
+            </tr>
+            <tr>
+                <td><strong>3</strong></td>
+                <td>📩 <strong>Follow-up #2</strong></td>
+                <td>Second follow-up nudge</td>
+            </tr>
+            <tr>
+                <td><strong>4</strong></td>
+                <td>📩 <strong>Follow-up #3</strong></td>
+                <td>Third and final follow-up</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="diagram-container">
+        <img src="sop-images/06-outreach-sequence.png" alt="Outreach Sequence Flow">
+    </div>
+
+    <div class="callout callout-warning">
+        <div class="callout-label">⚠️ Warning</div>
+        <strong>Keep messages short and conversational.</strong> LinkedIn is not email. Long pitches get ignored. Think
+        text message, not sales letter.
+    </div>
+
+    <hr>
+
+    <!-- C) Sales Navigator Lists -->
+    <h3>🅲 Sales Navigator Search Lists</h3>
+    <p class="context-line">Done LIVE with the Client — Do not skip the live session</p>
+
+    <div class="info-grid">
+        <span class="info-label">Why live?</span>
+        <span class="info-value">Clients rarely remember their Apollo targeting filters. Building the search together
+            prevents errors and avoids back-and-forth later.</span>
+        <span class="info-label">Where to do it?</span>
+        <span class="info-value">A short 1-on-1 call or during group coaching works fine.</span>
+        <span class="info-label">What to do?</span>
+        <span class="info-value">Recreate the same targeting filters from Apollo inside Sales Navigator — same job
+            titles, industries, company sizes, and geography.</span>
+    </div>
+
+    <p>You need to produce <strong>4 saved lists:</strong></p>
+
+    <div class="diagram-container">
+        <img src="sop-images/03-list-segmentation.png" alt="Lead List Segmentation Strategy">
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>List Name</th>
+                <th>Description</th>
+                <th>Target Size</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>1</strong></td>
+                <td><strong>TAM (Total Addressable Market)</strong></td>
+                <td>Full search with all core filters applied</td>
+                <td>Thousands</td>
+            </tr>
+            <tr>
+                <td><strong>2</strong></td>
+                <td><strong>Tier 1 Subset</strong></td>
+                <td>Narrower slice of TAM — narrow by geography or headcount</td>
+                <td>1,000–2,500</td>
+            </tr>
+            <tr>
+                <td><strong>3</strong></td>
+                <td><strong>Tier 2 Subset</strong></td>
+                <td>Different slice of TAM — use different filters than Tier 1</td>
+                <td>1,000–2,500</td>
+            </tr>
+            <tr>
+                <td><strong>4</strong></td>
+                <td><strong>1st Degree Connections</strong></td>
+                <td>Filter TAM for people already connected to the client</td>
+                <td>Varies</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="callout callout-important">
+        <div class="callout-label">⚠️ Important</div>
+        <strong>Why 1,000–2,500 per list?</strong> Expandi cannot import lists larger than ~2,500 leads. The strategy
+        coach breaks the TAM into manageable chunks by adding filters (states, headcount ranges, etc.) to narrow each
+        subset.
+    </div>
+
+    <h4>Example of Chunking:</h4>
+
+    <div class="code-block">
+        TAM = 8,000 marketing directors in the US<br>
+        ├── Tier 1&nbsp; → CA, TX, NY, FL&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; = 1,800 leads ✅<br>
+        ├── Tier 2&nbsp; → Remaining states&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; = 2,100 leads ✅<br>
+        └── 1st Deg → Already connected&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; = varies&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ✅
+    </div>
+
+    <hr>
+
+    <!-- ==================== PHASE 3 ==================== -->
+    <h2>⚙️ Phase 3 — Tech Coach Handoff</h2>
+
+    <p>Once you have completed everything in Phase 2, <strong>hand off to the tech coach</strong>. They will handle:</p>
+
+    <ul class="checklist">
+        <li>Expandi account setup (if the client hasn't done this yet)</li>
+        <li>Import all 4 Sales Navigator lists into Expandi</li>
+        <li>Create campaigns using the outreach copy you wrote</li>
+        <li>Set up automated connection request sequences</li>
+        <li>Set up automated follow-up message sequences</li>
+        <li>Configure daily sending limits and campaign settings</li>
+    </ul>
+
+    <h3>📦 What to Include in Your Handoff</h3>
+
+    <p>Send the tech coach <strong>all four items</strong>. No ambiguity, no missing pieces.</p>
+
+    <div class="handoff-grid">
+        <div class="handoff-card">
+            <div class="card-num">#1</div>
+            <div class="card-title">📝 Profile Copy</div>
+            <div class="card-desc">Headline, About section, Featured section link</div>
+        </div>
+        <div class="handoff-card">
+            <div class="card-num">#2</div>
+            <div class="card-title">💬 Outreach Messages</div>
+            <div class="card-desc">Connection request + 3 follow-ups (all 4 messages)</div>
+        </div>
+        <div class="handoff-card">
+            <div class="card-num">#3</div>
+            <div class="card-title">✅ List Confirmation</div>
+            <div class="card-desc">Confirm all 4 Sales Navigator lists are saved in the client's account</div>
+        </div>
+        <div class="handoff-card">
+            <div class="card-num">#4</div>
+            <div class="card-title">🏷️ List Names</div>
+            <div class="card-desc">The exact names of the 4 saved lists so the tech coach can find them</div>
+        </div>
+    </div>
+
+    <div class="callout callout-caution">
+        <div class="callout-label">🚨 Caution</div>
+        <strong>The cleaner your handoff, the faster the tech coach can set everything up.</strong> Missing copy or
+        unnamed lists cause delays that reflect poorly on the whole team.
+    </div>
+
+    <hr>
+
+    <!-- ==================== PITFALLS ==================== -->
+    <h2>⚠️ Common Pitfalls</h2>
+
+    <table class="pitfall-table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>🚩 Problem</th>
+                <th>✅ How to Avoid It</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>1</strong></td>
+                <td>Client hasn't purchased Sales Navigator or Expandi</td>
+                <td>Confirm both are active <strong>BEFORE</strong> starting Phase 2</td>
+            </tr>
+            <tr>
+                <td><strong>2</strong></td>
+                <td>Client can't remember their Apollo filters</td>
+                <td>Always build Sales Navigator lists <strong>live with the client</strong> — never ask them to do it
+                    alone</td>
+            </tr>
+            <tr>
+                <td><strong>3</strong></td>
+                <td>Lists are too large for Expandi</td>
+                <td>Keep each list between <strong>1,000 and 2,500 leads</strong>. Break the TAM into smaller segments
+                    using additional filters</td>
+            </tr>
+            <tr>
+                <td><strong>4</strong></td>
+                <td>Profile copy doesn't mention the webinar</td>
+                <td>The entire profile should funnel toward the webinar. Review every section for alignment</td>
+            </tr>
+            <tr>
+                <td><strong>5</strong></td>
+                <td>Handoff to tech coach is incomplete</td>
+                <td>Use the <strong>handoff checklist</strong> above. Missing copy or unnamed lists cause delays</td>
+            </tr>
+            <tr>
+                <td><strong>6</strong></td>
+                <td>Client thinks this replaces other lead gen</td>
+                <td>Set expectations: LinkedIn is an <strong>additional channel</strong>, not a replacement. Lead volume
+                    is typically lower than other channels</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <hr>
+
+    <!-- ==================== CHECKLISTS ==================== -->
+    <h2>✅ Quick Reference Checklist</h2>
+
+    <div class="checklist-section">
+        <h4>🟡 Before You Start</h4>
+        <ul class="checklist">
+            <li>Client's webinar funnel is already live</li>
+            <li>Client has purchased Sales Navigator</li>
+            <li>Client has purchased Expandi</li>
+        </ul>
+    </div>
+
+    <div class="checklist-section">
+        <h4>🔵 Strategy Coach Delivers</h4>
+        <p><strong>Profile Optimization:</strong></p>
+        <ul class="checklist">
+            <li>LinkedIn headline copy</li>
+            <li>LinkedIn About section copy</li>
+            <li>Banner image direction (using tech coach's Canva template)</li>
+            <li>Featured section link</li>
+        </ul>
+        <p><strong>Outreach Messages:</strong></p>
+        <ul class="checklist">
+            <li>Connection request message</li>
+            <li>Follow-up message #1</li>
+            <li>Follow-up message #2</li>
+            <li>Follow-up message #3</li>
+        </ul>
+        <p><strong>Sales Navigator Lists:</strong></p>
+        <ul class="checklist">
+            <li>TAM (full search)</li>
+            <li>Tier 1 (1,000–2,500 leads)</li>
+            <li>Tier 2 (1,000–2,500 leads)</li>
+            <li>1st Degree Connections from TAM</li>
+        </ul>
+    </div>
+
+    <div class="checklist-section">
+        <h4>🟢 Then Tech Coach Takes Over</h4>
+        <ul class="checklist">
+            <li>Expandi setup</li>
+            <li>List imports</li>
+            <li>Campaign creation</li>
+            <li>Automation configuration</li>
+        </ul>
+    </div>
+
+    <div class="footer">
+        📌 Questions about this SOP? Reach out to your team lead or post in the #strategy-coaches channel.
+    </div>
+
+</body>
+
+</html>

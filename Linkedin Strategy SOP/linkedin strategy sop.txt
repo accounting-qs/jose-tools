@@ -1,0 +1,172 @@
+# LinkedIn Promotion Strategy -- SOP for Strategy Coaches
+
+**Last Updated:** February 27, 2026
+**Audience:** Strategy coaches new to the LinkedIn promotion workflow
+**Context:** This is a continuous improvement strategy, not a prerequisite. The client's webinar funnel should already be live before starting LinkedIn promotion.
+
+---
+
+## Overview
+
+The LinkedIn promotion strategy uses LinkedIn Sales Navigator + Expandi (an automation tool) to send targeted connection requests and follow-up messages that drive prospects to the client's webinar. There are three phases with a clear handoff between strategy coach and tech coach.
+
+### Process Flow
+
+```
+PHASE 1: Prerequisites          PHASE 2: Strategy Coach Work       PHASE 3: Tech Coach Handoff
+(Client purchases tools)  --->  (Copy + targeting lists)     --->  (Automation setup)
+
+Client buys:                    Strategy coach prepares:            Tech coach handles:
+ - Sales Navigator ($99/mo)      - Profile optimization copy        - Expandi account setup
+ - Expandi ($99/mo)              - Outreach message copy            - List imports
+                                 - 4 Sales Navigator lists          - Campaign creation
+                                   (built WITH client)              - Automation config
+```
+
+### Cost to Client
+
+| Tool | Monthly Cost | Purpose |
+|------|-------------|---------|
+| LinkedIn Sales Navigator | ~$99/month | Advanced search and lead lists |
+| Expandi | ~$99/month | Automated outreach and follow-ups |
+| **Total** | **~$198/month** | |
+
+---
+
+## Phase 1: Prerequisites (Before Any Coaching Calls)
+
+The client needs both tools purchased and active before you begin Phase 2.
+
+### Client To-Do List
+
+- [ ] Purchase LinkedIn Sales Navigator (~$99/month)
+- [ ] Purchase Expandi (~$99/month)
+
+### How to Guide the Client
+
+- QS has a video walkthrough for purchasing Sales Navigator. Share it with the client so they can do this on their own.
+- If the client prefers help, they can schedule a short call with the tech coach to sign up.
+- Do NOT proceed to Phase 2 until both tools are active.
+
+---
+
+## Phase 2: Strategy Coach Work (Copy + Targeting)
+
+This is your main responsibility. You need to deliver three things before handing off to the tech coach:
+
+1. LinkedIn profile optimization copy
+2. Outreach message copy
+3. Four Sales Navigator search lists
+
+### A) LinkedIn Profile Optimization Copy
+
+The client's LinkedIn profile needs to be rewritten to align with their webinar and offer. Prepare the following:
+
+- [ ] **Headline** -- rewritten to align with the webinar/offer (not their job title)
+- [ ] **About section** -- describes who they are, what they do, and promotes the webinar. Everything should point toward the webinar as the call to action.
+- [ ] **Banner image** -- the tech coach will provide a Canva template. The client (or their VA) creates the banner using that template. The banner should include a webinar invitation.
+- [ ] **Featured section** -- updated with a direct link to the webinar registration/event page
+
+**Note:** The copywriter (James or Mike) can write the headline and About section if needed. Coordinate with them early so this doesn't become a bottleneck.
+
+### B) Outreach Message Copy
+
+Write four messages total. All messages must be aligned to the client's specific offer, niche, and business:
+
+- [ ] **Connection request message** -- the opening message sent with the connection request
+- [ ] **Follow-up message #1** -- sent after connection is accepted
+- [ ] **Follow-up message #2** -- second follow-up
+- [ ] **Follow-up message #3** -- third follow-up
+
+**Tip:** Keep messages short and conversational. LinkedIn is not email. Long pitches get ignored.
+
+### C) Sales Navigator Search Lists (Done LIVE With the Client)
+
+This step requires a short call with the client. Do not skip the live session.
+
+**Why live?** Clients rarely remember their Apollo targeting filters. Building the search together prevents errors and avoids back-and-forth later.
+
+**Where to do it:** A short 1-on-1 call or during group coaching works fine.
+
+**What to do:** Recreate the same targeting filters the client uses in Apollo, but inside Sales Navigator. Use the same job titles, industries, company sizes, and geography.
+
+You need to produce **4 saved lists:**
+
+- [ ] **List 1: Total Addressable Market (TAM)** -- the full search with all core filters applied. This will likely return thousands of results.
+- [ ] **List 2: Tier 1 subset** -- a narrower slice of the TAM with 1,000 to 2,500 leads. Narrow by adding filters like geography (specific states) or company headcount.
+- [ ] **List 3: Tier 2 subset** -- a different slice of the TAM, also 1,000 to 2,500 leads. Use different geographic or demographic filters than Tier 1.
+- [ ] **List 4: 1st Degree Connections from TAM** -- filter the TAM search for people already connected to the client on LinkedIn.
+
+**Why 1,000-2,500 per list?** Expandi cannot import lists larger than ~2,500 leads. The strategy coach breaks the TAM into manageable chunks by adding filters (states, headcount ranges, etc.) to narrow each subset.
+
+**Example of chunking:**
+- TAM = 8,000 marketing directors in the US
+- Tier 1 = marketing directors in CA, TX, NY, FL (1,800 leads)
+- Tier 2 = marketing directors in remaining states (2,100 leads)
+- 1st Degree = marketing directors already connected to client (varies)
+
+---
+
+## Phase 3: Tech Coach Handoff
+
+Once you have completed everything in Phase 2, hand off to the tech coach. They will handle:
+
+- [ ] Expandi account setup (if the client hasn't done this yet)
+- [ ] Import all 4 Sales Navigator lists into Expandi
+- [ ] Create campaigns using the outreach copy you wrote
+- [ ] Set up automated connection request sequences
+- [ ] Set up automated follow-up message sequences
+- [ ] Configure daily sending limits and campaign settings
+
+### What to Include in Your Handoff
+
+Send the tech coach:
+
+1. The profile optimization copy (headline, About section, Featured section link)
+2. All 4 outreach messages (connection request + 3 follow-ups)
+3. Confirmation that the 4 Sales Navigator lists are saved in the client's account
+4. The names of the 4 saved lists so the tech coach can find them
+
+**The cleaner your handoff, the faster the tech coach can set everything up. No ambiguity, no missing pieces.**
+
+---
+
+## Common Pitfalls
+
+| Problem | How to Avoid It |
+|---------|----------------|
+| Client hasn't purchased Sales Navigator or Expandi | Confirm both are active BEFORE starting Phase 2 |
+| Client can't remember their Apollo filters | Always build Sales Navigator lists live with the client, never ask them to do it alone |
+| Lists are too large for Expandi | Keep each list between 1,000 and 2,500 leads. Break the TAM into smaller segments using additional filters |
+| Profile copy doesn't mention the webinar | The entire profile should funnel toward the webinar. Review every section for alignment. |
+| Handoff to tech coach is incomplete | Use the handoff checklist above. Missing copy or unnamed lists cause delays. |
+| Client thinks this replaces other lead gen | Set expectations: LinkedIn is an additional channel, not a replacement. Lead volume from LinkedIn is typically lower than other channels. |
+
+---
+
+## Quick Reference Checklist
+
+### Before You Start
+- [ ] Client's webinar funnel is already live
+- [ ] Client has purchased Sales Navigator
+- [ ] Client has purchased Expandi
+
+### Strategy Coach Delivers
+- [ ] LinkedIn headline copy
+- [ ] LinkedIn About section copy
+- [ ] Banner image direction (using tech coach's Canva template)
+- [ ] Featured section link
+- [ ] Connection request message
+- [ ] Follow-up message #1
+- [ ] Follow-up message #2
+- [ ] Follow-up message #3
+- [ ] Sales Navigator List: TAM
+- [ ] Sales Navigator List: Tier 1 (1,000-2,500 leads)
+- [ ] Sales Navigator List: Tier 2 (1,000-2,500 leads)
+- [ ] Sales Navigator List: 1st Degree Connections from TAM
+
+### Then Tech Coach Takes Over
+- [ ] Expandi setup
+- [ ] List imports
+- [ ] Campaign creation
+- [ ] Automation configuration

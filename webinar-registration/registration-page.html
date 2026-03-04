@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title id="page-title">Webinar Registration</title>
+  <meta name="description" id="meta-desc" content="Register for our upcoming live webinar">
+  <meta property="og:title" id="og-title" content="Webinar Registration">
+  <meta property="og:description" id="og-desc" content="Register for our upcoming live webinar">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    /* ── Reset & Variables ──────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --brand: #6C3AED; --brand-light: #8B5CF6; --brand-dark: #5B21B6;
+      --accent: #F59E0B; --accent-light: #FBBF24;
+      --bg: #0F0B1A; --bg-card: #1A1428; --bg-card-hover: #231D33;
+      --text: #F1EEFB; --text-muted: #A09BB5; --text-dark: #6B6580;
+      --border: rgba(139,92,246,0.15); --glow: rgba(108,58,237,0.3);
+      --radius: 16px; --radius-sm: 10px;
+      --font: 'Inter', -apple-system, sans-serif;
+      --max-w: 720px;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font); background: var(--bg); color: var(--text);
+      line-height: 1.65; -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    img { max-width: 100%; height: auto; display: block; }
+    a { color: var(--brand-light); text-decoration: none; }
+
+    /* ── Loading Skeleton ───────────────────────────────── */
+    .skeleton { background: linear-gradient(90deg, var(--bg-card) 25%, var(--bg-card-hover) 50%, var(--bg-card) 75%);
+      background-size: 200% 100%; animation: shimmer 1.5s infinite; border-radius: var(--radius-sm); }
+    @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+
+    /* ── Animations ─────────────────────────────────────── */
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+    @keyframes countPulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
+    @keyframes slideIn { from { opacity: 0; transform: translateX(-20px); } to { opacity: 1; transform: translateX(0); } }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .reveal { opacity: 0; transform: translateY(30px); transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── Hero Banner ────────────────────────────────────── */
+    .hero { position: relative; width: 100%; min-height: 340px; overflow: hidden; }
+    .hero__img { width: 100%; height: 100%; object-fit: cover; min-height: 340px; }
+    .hero__overlay { position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(15,11,26,0.1) 0%, rgba(15,11,26,0.85) 100%); }
+    .hero__badge { position: absolute; top: 20px; left: 20px;
+      background: rgba(245,158,11,0.95); color: #000; font-weight: 700; font-size: 0.75rem;
+      padding: 6px 14px; border-radius: 50px; text-transform: uppercase; letter-spacing: 1px;
+      display: flex; align-items: center; gap: 6px; z-index: 2; }
+    .hero__badge .dot { width: 8px; height: 8px; background: #dc2626; border-radius: 50%; animation: pulse 1.5s infinite; }
+
+    /* ── Urgency Bar / Countdown ─────────────────────────── */
+    .urgency-bar { background: linear-gradient(135deg, var(--brand-dark), var(--brand));
+      padding: 18px 20px; text-align: center; position: relative; overflow: hidden; }
+    .urgency-bar::before { content: ''; position: absolute; inset: 0;
+      background: repeating-linear-gradient(90deg, transparent, transparent 10px, rgba(255,255,255,0.03) 10px, rgba(255,255,255,0.03) 20px); }
+    .urgency-bar__text { font-size: 0.9rem; color: rgba(255,255,255,0.85); margin-bottom: 8px; position: relative; }
+    .countdown { display: flex; justify-content: center; gap: 12px; position: relative; }
+    .countdown__unit { text-align: center; }
+    .countdown__value { font-size: 1.8rem; font-weight: 800; color: #fff;
+      background: rgba(0,0,0,0.3); border-radius: var(--radius-sm); padding: 6px 14px;
+      min-width: 58px; display: inline-block; font-variant-numeric: tabular-nums; }
+    .countdown__label { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 1px;
+      color: rgba(255,255,255,0.6); margin-top: 4px; }
+
+    /* ── Section wrapper ────────────────────────────────── */
+    .section { max-width: var(--max-w); margin: 0 auto; padding: 48px 20px; }
+    .section--wide { max-width: 900px; }
+    .section__title { font-size: 1.5rem; font-weight: 800; margin-bottom: 8px;
+      background: linear-gradient(135deg, var(--text), var(--brand-light));
+      -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+    .section__subtitle { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 28px; }
+
+    /* ── Date Selector ──────────────────────────────────── */
+    .dates { display: grid; gap: 12px; }
+    .date-card { background: var(--bg-card); border: 2px solid var(--border); border-radius: var(--radius);
+      padding: 18px 20px; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; gap: 16px; }
+    .date-card:hover { border-color: var(--brand-light); background: var(--bg-card-hover); }
+    .date-card.selected { border-color: var(--brand); background: rgba(108,58,237,0.1);
+      box-shadow: 0 0 20px var(--glow); }
+    .date-card__icon { width: 48px; height: 48px; border-radius: 12px;
+      background: linear-gradient(135deg, var(--brand), var(--brand-light));
+      display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; }
+    .date-card__info { flex: 1; }
+    .date-card__date { font-weight: 700; font-size: 1rem; }
+    .date-card__time { color: var(--text-muted); font-size: 0.85rem; margin-top: 2px; }
+    .date-card__check { width: 24px; height: 24px; border-radius: 50%; border: 2px solid var(--border);
+      display: flex; align-items: center; justify-content: center; transition: all 0.3s; flex-shrink: 0; }
+    .date-card.selected .date-card__check { background: var(--brand); border-color: var(--brand); }
+    .date-card.selected .date-card__check::after { content: '✓'; color: #fff; font-size: 0.75rem; font-weight: 700; }
+
+    /* ── Bullets (What You'll Learn) ─────────────────────── */
+    .bullets { display: grid; gap: 16px; }
+    .bullet { display: flex; gap: 16px; align-items: flex-start;
+      background: var(--bg-card); border-radius: var(--radius); padding: 20px;
+      border: 1px solid var(--border); transition: all 0.3s ease; }
+    .bullet:hover { border-color: var(--brand-light); transform: translateX(4px); }
+    .bullet__icon { font-size: 1.5rem; flex-shrink: 0; width: 44px; height: 44px;
+      background: rgba(108,58,237,0.15); border-radius: 12px;
+      display: flex; align-items: center; justify-content: center; }
+    .bullet__text { font-size: 0.95rem; line-height: 1.5; }
+    .bullet__text strong { color: var(--brand-light); }
+
+    /* ── Social Proof ───────────────────────────────────── */
+    .social-proof { text-align: center; }
+    .proof-counter { font-size: 2.5rem; font-weight: 900; color: var(--accent);
+      margin-bottom: 4px; font-variant-numeric: tabular-nums; }
+    .proof-label { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 32px; }
+    .testimonials { display: grid; gap: 16px; }
+    @media (min-width: 640px) { .testimonials { grid-template-columns: 1fr 1fr; } }
+    .testimonial { background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 24px; text-align: left; position: relative; }
+    .testimonial::before { content: '"'; position: absolute; top: 12px; left: 18px;
+      font-size: 3rem; color: var(--brand); opacity: 0.3; font-family: Georgia, serif; line-height: 1; }
+    .testimonial__text { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 12px;
+      padding-top: 16px; font-style: italic; }
+    .testimonial__author { font-weight: 600; font-size: 0.85rem; color: var(--text); }
+
+    /* ── Speaker ────────────────────────────────────────── */
+    .speaker { display: flex; gap: 24px; align-items: flex-start;
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 28px; }
+    .speaker__img { width: 100px; height: 100px; border-radius: 50%; object-fit: cover;
+      border: 3px solid var(--brand); flex-shrink: 0; }
+    .speaker__name { font-size: 1.2rem; font-weight: 700; }
+    .speaker__title { color: var(--brand-light); font-size: 0.85rem; margin-bottom: 10px; }
+    .speaker__bio { color: var(--text-muted); font-size: 0.9rem; }
+    @media (max-width: 480px) { .speaker { flex-direction: column; align-items: center; text-align: center; } }
+
+    /* ── Registration Form ──────────────────────────────── */
+    .form-section { background: linear-gradient(180deg, rgba(108,58,237,0.05), rgba(108,58,237,0.12));
+      border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .form-card { background: var(--bg-card); border: 2px solid var(--brand);
+      border-radius: var(--radius); padding: 32px 24px; box-shadow: 0 0 40px var(--glow); }
+    .form-card__title { text-align: center; font-size: 1.3rem; font-weight: 800; margin-bottom: 6px; }
+    .form-card__sub { text-align: center; color: var(--text-muted); font-size: 0.85rem; margin-bottom: 24px; }
+    .form-group { margin-bottom: 14px; }
+    .form-group label { display: block; font-size: 0.8rem; font-weight: 600;
+      color: var(--text-muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .form-group input { width: 100%; padding: 14px 16px; border: 2px solid var(--border);
+      border-radius: var(--radius-sm); background: var(--bg); color: var(--text);
+      font-size: 1rem; font-family: var(--font); transition: border-color 0.3s; outline: none; }
+    .form-group input:focus { border-color: var(--brand-light); box-shadow: 0 0 0 3px var(--glow); }
+    .form-group input::placeholder { color: var(--text-dark); }
+    .btn-register { width: 100%; padding: 16px; border: none; border-radius: var(--radius-sm);
+      background: linear-gradient(135deg, var(--accent), var(--accent-light));
+      color: #000; font-size: 1.05rem; font-weight: 800; font-family: var(--font);
+      cursor: pointer; transition: all 0.3s; text-transform: uppercase; letter-spacing: 1px;
+      position: relative; overflow: hidden; margin-top: 6px; }
+    .btn-register:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(245,158,11,0.35); }
+    .btn-register:active { transform: translateY(0); }
+    .btn-register:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
+    .btn-register .spinner { display: none; width: 20px; height: 20px; border: 3px solid rgba(0,0,0,0.2);
+      border-top-color: #000; border-radius: 50%; animation: spin 0.6s linear infinite;
+      margin: 0 auto; }
+    .btn-register.loading .btn-text { display: none; }
+    .btn-register.loading .spinner { display: block; }
+    .form-privacy { text-align: center; font-size: 0.75rem; color: var(--text-dark);
+      margin-top: 12px; }
+    .form-privacy svg { vertical-align: middle; margin-right: 4px; }
+    .urgency-note { text-align: center; color: var(--accent); font-size: 0.85rem;
+      font-weight: 600; margin-top: 16px; }
+
+    /* ── Thank You State ────────────────────────────────── */
+    .thankyou { display: none; text-align: center; padding: 20px 0; animation: fadeUp 0.6s ease; }
+    .thankyou.active { display: block; }
+    .thankyou__icon { font-size: 3.5rem; margin-bottom: 16px; }
+    .thankyou__title { font-size: 1.6rem; font-weight: 800; margin-bottom: 8px; }
+    .thankyou__sub { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 28px; }
+    .btn-join { display: inline-flex; align-items: center; gap: 10px; padding: 18px 40px;
+      background: linear-gradient(135deg, var(--brand), var(--brand-light));
+      color: #fff; font-size: 1.1rem; font-weight: 800; border-radius: var(--radius-sm);
+      border: none; cursor: pointer; font-family: var(--font); transition: all 0.3s;
+      text-decoration: none; text-transform: uppercase; letter-spacing: 1px;
+      animation: countPulse 2s ease infinite; }
+    .btn-join:hover { transform: translateY(-2px); box-shadow: 0 8px 30px var(--glow); }
+    .cal-links { margin-top: 24px; display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+    .cal-link { display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px;
+      border: 1px solid var(--border); border-radius: 50px; font-size: 0.8rem;
+      color: var(--text-muted); transition: all 0.3s; }
+    .cal-link:hover { border-color: var(--brand-light); color: var(--text); }
+    .thankyou__note { color: var(--text-dark); font-size: 0.8rem; margin-top: 20px; }
+
+    /* ── FAQ ─────────────────────────────────────────────── */
+    .faq-list { display: grid; gap: 10px; }
+    .faq-item { background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); overflow: hidden; }
+    .faq-item__q { width: 100%; padding: 18px 20px; background: none; border: none;
+      color: var(--text); font-size: 0.95rem; font-weight: 600; font-family: var(--font);
+      text-align: left; cursor: pointer; display: flex; justify-content: space-between;
+      align-items: center; transition: color 0.3s; }
+    .faq-item__q:hover { color: var(--brand-light); }
+    .faq-item__q .arrow { transition: transform 0.3s; font-size: 0.8rem; color: var(--text-dark); }
+    .faq-item.open .faq-item__q .arrow { transform: rotate(180deg); }
+    .faq-item__a { max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.3s ease; }
+    .faq-item.open .faq-item__a { max-height: 300px; padding: 0 20px 18px; }
+    .faq-item__a p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; }
+
+    /* ── Final CTA ──────────────────────────────────────── */
+    .final-cta { text-align: center; padding-bottom: 80px; }
+    .final-cta .btn-register { max-width: 400px; margin: 0 auto; display: block; }
+
+    /* ── Footer ─────────────────────────────────────────── */
+    .footer { text-align: center; padding: 24px 20px; color: var(--text-dark);
+      font-size: 0.75rem; border-top: 1px solid var(--border); }
+
+    /* ── Mobile Sticky CTA ──────────────────────────────── */
+    .mobile-cta { display: none; position: fixed; bottom: 0; left: 0; right: 0;
+      padding: 12px 20px; background: rgba(15,11,26,0.95); backdrop-filter: blur(10px);
+      border-top: 1px solid var(--border); z-index: 100; }
+    .mobile-cta .btn-register { margin: 0; }
+    @media (max-width: 768px) { .mobile-cta.visible { display: block; } body { padding-bottom: 70px; } }
+    .hidden { display: none !important; }
+
+    /* ── Error ──────────────────────────────────────────── */
+    .form-error { background: rgba(220,38,38,0.1); border: 1px solid rgba(220,38,38,0.3);
+      color: #fca5a5; padding: 10px 14px; border-radius: var(--radius-sm);
+      font-size: 0.85rem; margin-bottom: 14px; display: none; }
+    .form-error.visible { display: block; }
+  </style>
+</head>
+<body>
+
+  <!-- ══ HERO BANNER ══════════════════════════════════════ -->
+  <section class="hero">
+    <img class="hero__img" id="heroBanner" src="" alt="Webinar Banner">
+    <div class="hero__overlay"></div>
+    <div class="hero__badge"><span class="dot"></span> LIVE EVENT</div>
+  </section>
+
+  <!-- ══ URGENCY / COUNTDOWN ══════════════════════════════ -->
+  <div class="urgency-bar">
+    <div class="urgency-bar__text" id="countdownLabel">Loading event details...</div>
+    <div class="countdown" id="countdown">
+      <div class="countdown__unit"><span class="countdown__value" id="cd-days">--</span><div class="countdown__label">Days</div></div>
+      <div class="countdown__unit"><span class="countdown__value" id="cd-hours">--</span><div class="countdown__label">Hours</div></div>
+      <div class="countdown__unit"><span class="countdown__value" id="cd-mins">--</span><div class="countdown__label">Minutes</div></div>
+      <div class="countdown__unit"><span class="countdown__value" id="cd-secs">--</span><div class="countdown__label">Seconds</div></div>
+    </div>
+  </div>
+
+  <!-- ══ HEADLINE ═════════════════════════════════════════ -->
+  <section class="section reveal" id="headlineSection">
+    <h1 class="section__title" id="headline" style="font-size:1.9rem; text-align:center;"></h1>
+    <p class="section__subtitle" id="subHeadline" style="text-align:center; max-width: 560px; margin: 8px auto 0;"></p>
+  </section>
+
+  <!-- ══ DATE SELECTOR ════════════════════════════════════ -->
+  <section class="section reveal" id="dateSection">
+    <h2 class="section__title">📅 Choose Your Session</h2>
+    <p class="section__subtitle">Select the date and time that works best for you</p>
+    <div class="dates" id="dateCards"></div>
+  </section>
+
+  <!-- ══ WHAT YOU'LL LEARN ════════════════════════════════ -->
+  <section class="section reveal" id="bulletsSection">
+    <h2 class="section__title">🎯 What You'll Discover</h2>
+    <p class="section__subtitle">Here's exactly what we'll cover in this training</p>
+    <div class="bullets" id="bullets"></div>
+  </section>
+
+  <!-- ══ SOCIAL PROOF ═════════════════════════════════════ -->
+  <section class="section social-proof reveal" id="proofSection">
+    <div class="proof-counter" id="proofCounter">0</div>
+    <div class="proof-label" id="proofLabel">professionals already registered</div>
+    <div class="testimonials" id="testimonials"></div>
+  </section>
+
+  <!-- ══ SPEAKER ══════════════════════════════════════════ -->
+  <section class="section reveal" id="speakerSection">
+    <h2 class="section__title">🎤 Your Host</h2>
+    <p class="section__subtitle" style="margin-bottom:20px;">Meet the expert leading this session</p>
+    <div class="speaker">
+      <img class="speaker__img" id="speakerImg" src="" alt="Speaker">
+      <div>
+        <div class="speaker__name" id="speakerName"></div>
+        <div class="speaker__title" id="speakerTitle"></div>
+        <p class="speaker__bio" id="speakerBio"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ REGISTRATION FORM ════════════════════════════════ -->
+  <section class="form-section" id="formSection">
+    <div class="section">
+      <div class="form-card" id="formCard">
+        <div id="formState">
+          <h2 class="form-card__title" id="ctaTitle">Reserve Your Spot Now</h2>
+          <p class="form-card__sub">Join the live training — completely free</p>
+          <div class="form-error" id="formError"></div>
+          <form id="regForm" autocomplete="on">
+            <div class="form-group">
+              <label for="regName">Your Name</label>
+              <input type="text" id="regName" name="name" placeholder="Enter your full name" required>
+            </div>
+            <div class="form-group">
+              <label for="regEmail">Email Address</label>
+              <input type="email" id="regEmail" name="email" placeholder="Enter your best email" required>
+            </div>
+            <button type="submit" class="btn-register" id="btnSubmit">
+              <span class="btn-text" id="btnText">Reserve My Spot Now →</span>
+              <span class="spinner"></span>
+            </button>
+          </form>
+          <p class="form-privacy">🔒 We respect your privacy. No spam, ever.</p>
+          <p class="urgency-note" id="urgencyNote"></p>
+        </div>
+        <div class="thankyou" id="thankyouState">
+          <div class="thankyou__icon">🎉</div>
+          <h2 class="thankyou__title">You're Registered!</h2>
+          <p class="thankyou__sub">Your spot is confirmed. Use the button below to join when it's time.</p>
+          <a class="btn-join" id="btnJoin" href="#" target="_blank">🎯 Join Webinar</a>
+          <div class="cal-links" id="calLinks">
+            <a class="cal-link" id="calGoogle" href="#" target="_blank">📅 Google Calendar</a>
+            <a class="cal-link" id="calIcs" href="#" download="webinar.ics">🍎 Apple / Outlook</a>
+          </div>
+          <p class="thankyou__note">📧 A confirmation email has been sent by WebinarGeek</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ FAQ ══════════════════════════════════════════════ -->
+  <section class="section reveal" id="faqSection">
+    <h2 class="section__title">❓ Frequently Asked Questions</h2>
+    <p class="section__subtitle">Everything you need to know</p>
+    <div class="faq-list" id="faqList"></div>
+  </section>
+
+  <!-- ══ FINAL CTA ════════════════════════════════════════ -->
+  <section class="section final-cta reveal" id="finalCtaSection">
+    <h2 class="section__title" style="text-align:center;">Don't Miss Out</h2>
+    <p class="section__subtitle" style="text-align:center; margin-bottom:20px;">Secure your free spot before it's too late</p>
+    <button class="btn-register" onclick="document.getElementById('formSection').scrollIntoView({behavior:'smooth'})">
+      <span class="btn-text">Register Now — It's Free →</span>
+    </button>
+  </section>
+
+  <footer class="footer">Powered by your team · All rights reserved</footer>
+
+  <!-- ══ MOBILE STICKY CTA ════════════════════════════════ -->
+  <div class="mobile-cta" id="mobileCta">
+    <button class="btn-register" onclick="document.getElementById('formSection').scrollIntoView({behavior:'smooth'})">
+      <span class="btn-text">Register Now — Free →</span>
+    </button>
+  </div>
+
+  <script src="registration.js"></script>
+</body>
+</html>
